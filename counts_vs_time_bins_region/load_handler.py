@@ -1,6 +1,5 @@
 import os
 import pyfits
-from PIL import Image
 import numpy as np
 
 
@@ -13,13 +12,8 @@ def load_data(file_name):
         hdulist = pyfits.open(file_name)
         hdu = hdulist[0]
         _image = np.asarray(hdu.data)
+        hdulist.close()
         return _image
-    
-    elif (data_type == '.tif') or (data_type == '.tiff'):
-        _image = Image.open(file_name)
-        _image = np.asarray(_image)
-        return _image
-    
     else:
         raise NotImplementedError
     
